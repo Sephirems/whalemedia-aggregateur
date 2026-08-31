@@ -12,7 +12,22 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const RACINE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DOSSIER_CACHE = path.join(RACINE, '.cache');
+
+/**
+ * Emplacement du cache disque.
+ *
+ * En local, un dossier du projet. Sur une plateforme sans serveur permanent
+ * (Vercel), le système de fichiers est en lecture seule sauf `/tmp` : on s'y
+ * replie, en sachant que ce cache ne vit que le temps d'une instance et n'est
+ * pas partagé entre elles.
+ *
+ * Ce n'est pas un problème dans ce contexte : les réponses de l'API y sont
+ * mises en cache par le CDN, en amont, via leurs en-têtes `Cache-Control`.
+ * Le cache disque n'est plus qu'un gain opportuniste.
+ */
+const DOSSIER_CACHE = process.env.VERCEL
+  ? path.join('/tmp', 'whalemedia-cache')
+  : path.join(RACINE, '.cache');
 
 const AGENT =
   'WhaleMediaAggregator/0.1 (+agrégateur interne ; contact cloixremy@hotmail.com)';

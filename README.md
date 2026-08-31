@@ -46,6 +46,59 @@ répondent toujours. Ajoutez `--force` pour ignorer le cache.
 
 ---
 
+## Déploiement sur Vercel
+
+Le projet est prêt à être déployé : un dossier `api/` contient les fonctions,
+et `vercel.json` la configuration.
+
+1. Sur [vercel.com](https://vercel.com) → *Add New → Project*, choisir ce dépôt.
+2. Ajouter `ANTHROPIC_API_KEY` dans **Settings → Environment Variables** pour
+   activer les résumés rédigés par IA (facultatif).
+3. *Deploy*. Chaque `git push` redéploie ensuite automatiquement.
+
+### Ce qui change entre le local et la plateforme
+
+La logique de `src/` est **identique** dans les deux cas. Seul le transport
+diffère :
+
+| | Local | Vercel |
+| --- | --- | --- |
+| Serveur | `src/server.js`, processus permanent | `api/*.js`, fonctions à la demande |
+| Cache | `.cache/` sur disque | en-têtes `Cache-Control` sur le CDN |
+| Clé API | fichier `.env` | variable d'environnement du projet |
+| Statique | servi par `server.js` | servi par le CDN depuis `public/` |
+
+Les fonctions de `api/` ne sont que des enveloppes HTTP de quelques lignes
+autour des mêmes modules.
+
+### Le cache, remplacé plutôt que porté
+
+Une fonction sans serveur permanent ne peut pas écrire durablement sur disque :
+le système de fichiers y est en lecture seule sauf `/tmp`, qui n'est ni partagé
+entre instances ni garanti d'un appel à l'autre.
+
+Mais le comportement implémenté à la main dans `src/http.js` — servir une
+entrée expirée, puis la rafraîchir en arrière-plan — est un standard HTTP :
+
+```
+Cache-Control: public, s-maxage=3600, stale-while-revalidate=86400
+```
+
+Le CDN de Vercel l'applique nativement. Le résultat est **meilleur** qu'en
+local, car ce cache est partagé par tous les visiteurs : cent consultations
+dans l'heure ne déclenchent qu'un seul passage sur les six sites.
+
+| Endpoint | Fraîcheur | Raison |
+| --- | --- | --- |
+| `/api/articles` | 1 h | même durée que le cache local |
+| `/api/recherche` | 6 h | la page `?s=` est l'endpoint le plus lourd des sites |
+| `/api/resume` | 1 h | |
+| `/api/config` | aucune | dépend de la configuration du déploiement |
+
+`src/http.js` bascule vers `/tmp` quand `process.env.VERCEL` est présent : le
+cache disque n'y est plus qu'un gain opportuniste, la vraie protection étant en
+amont, sur le CDN.
+
 ## À savoir avant de reprendre ce projet
 
 Cette section rassemble ce qui peut surprendre quelqu'un qui récupère le dépôt.
