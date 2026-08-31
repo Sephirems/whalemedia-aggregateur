@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agrégateur WhaleMedia</title>
+  <meta name="description" content="Les derniers articles publiés sur les six sites du réseau.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>📡</text></svg>">
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="identite">
+        <div class="identite-ligne">
+          <span class="logo-reseau">
+            <img src="https://whalemedia.eu/wp-content/uploads/2024/03/cropped-logo-Whale-Media.png"
+                 alt="Whale Media" width="382" height="151" loading="eager">
+          </span>
+          <span class="nom-reseau">Réseau</span>
+        </div>
+        <p class="identite-note">
+          Agrégation de six sites WordPress via leurs flux RSS et la REST API.
+          Données mises en cache une heure.
+        </p>
+      </div>
+
+      <form class="recherche" id="formulaire-recherche" role="search">
+        <input
+          type="search"
+          id="champ-recherche"
+          class="recherche-champ"
+          placeholder="Rechercher un sujet…"
+          aria-label="Rechercher un sujet sur les six sites"
+          autocomplete="off"
+          spellcheck="false">
+        <button type="submit" class="bouton bouton-primaire" id="bouton-chercher">Chercher</button>
+        <button type="button" class="bouton" id="bouton-effacer" hidden>Effacer</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="page">
+    <h1>Derniers articles</h1>
+
+    <section class="resultats" id="resultats" hidden></section>
+
+    <details class="filtres" id="filtres">
+      <summary class="filtres-titre">
+        <span>Filtres</span>
+        <span class="filtres-resume" id="filtres-resume"></span>
+      </summary>
+
+      <div class="filtres-corps">
+        <div class="groupe-filtre">
+          <span class="libelle-filtre">Site</span>
+          <div class="chips" id="filtres-site" role="group" aria-label="Filtrer par site"></div>
+        </div>
+        <div class="groupe-filtre">
+          <span class="libelle-filtre">Format</span>
+          <div class="chips" id="filtres-type" role="group" aria-label="Filtrer par format"></div>
+        </div>
+      </div>
+    </details>
+
+    <div class="grille" id="grille"></div>
+
+    <div class="message" id="message" hidden></div>
+
+    <!-- Comptage et fraîcheur : information de contrôle, elle se lit après
+         avoir parcouru les articles, pas avant. -->
+    <p class="compteur" id="compteur" role="status" aria-live="polite"></p>
+
+    <p class="etat-ligne">
+      <span id="resume">Chargement…</span>
+      <button type="button" id="rafraichir" class="lien-action">Actualiser</button>
+    </p>
+
+    <section class="diagnostic" id="diagnostic" hidden>
+      <h2>Diagnostic des sources</h2>
+      <ul id="liste-diagnostic"></ul>
+    </section>
+  </main>
+
+  <footer class="pied">
+    <div class="pied-inner">
+      <p class="mode-resume" id="mode-resume"></p>
+
+      <section class="mention" aria-labelledby="mention-titre">
+        <h2 class="mention-titre" id="mention-titre">Projet personnel à but démonstratif</h2>
+
+        <p>
+          Ce projet a été développé de façon indépendante à des fins de
+          démonstration technique. Il n'est ni affilié à, ni commandité, ni
+          officiellement approuvé par Whale&nbsp;Media.
+        </p>
+
+        <p>
+          Les noms, marques, logos, articles, images et contenus présentés
+          appartiennent à leurs propriétaires respectifs. Les données sont
+          récupérées depuis des sources publiques — flux RSS, API ouvertes et
+          pages accessibles à tous — et affichées uniquement pour illustrer le
+          fonctionnement de l'outil. Chaque article renvoie vers sa source
+          d'origine.
+        </p>
+
+        <p>
+          Aucun contenu n'est republié, revendiqué, ni exploité à des fins
+          commerciales.
+        </p>
+
+        <p class="mention-copyright">© 2026 — Projet personnel de démonstration</p>
+      </section>
+    </div>
+  </footer>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>

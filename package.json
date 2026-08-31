@@ -1,0 +1,19 @@
+{
+  "name": "whalemedia-aggregateur",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agrégateur des 3 derniers articles de 6 sites WordPress",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "optionalDependencies": {
+    "@anthropic-ai/sdk": "^0.122.0"
+  },
+  "scripts": {
+    "start": "node --watch src/server.js",
+    "start:simple": "node src/server.js",
+    "refresh": "node src/refresh.js",
+    "check": "node src/check.js"
+  }
+}

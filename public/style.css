@@ -1,0 +1,1069 @@
+/* Palette et typographie alignées sur le rapport d'audit du projet. */
+
+:root {
+  --ground: #f6f8fb;
+  --surface: #ffffff;
+  --surface-2: #eceff5;
+  --ink: #171a21;
+  --ink-2: #4c5462;
+  --ink-3: #7b8492;
+  --line: #dce2ea;
+  --line-strong: #c3cbd6;
+  --accent: #1e73be;
+  --accent-soft: #e8f1fa;
+  --ok: #136f43;
+  --bad: #a32218;
+  --bad-soft: #fbe7e4;
+  --ombre: 0 1px 2px rgba(23, 26, 33, .06), 0 10px 28px -20px rgba(23, 26, 33, .4);
+  --rayon: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: #0e1117;
+    --surface: #151a22;
+    --surface-2: #1d232c;
+    --ink: #e9ecf2;
+    --ink-2: #a7b0be;
+    --ink-3: #6e7787;
+    --line: #28303a;
+    --line-strong: #3a434f;
+    --accent: #2386dc;
+    --accent-soft: #12212f;
+    --ok: #41c88a;
+    --bad: #f1786b;
+    --bad-soft: #2c1815;
+    --ombre: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px -20px rgba(0, 0, 0, .9);
+  }
+}
+
+* { box-sizing: border-box; }
+
+/*
+ * Un `display` défini par la feuille de style l'emporte sur la règle par
+ * défaut du navigateur pour [hidden] : sans cette ligne, tout élément mis en
+ * flex ou en grid reste visible malgré `element.hidden = true`.
+ */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: Archivo, ui-sans-serif, system-ui, sans-serif;
+  margin: 0;
+  text-wrap: balance;
+}
+
+/* ---------- en-tête ---------- */
+
+.masthead {
+  border-bottom: 1px solid var(--line-strong);
+  background: var(--surface);
+}
+
+.masthead-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 26px 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+
+
+
+
+.bouton {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--rayon);
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease;
+}
+
+.bouton:hover:not(:disabled) {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.bouton:disabled { opacity: .5; cursor: progress; }
+
+/* ---------- recherche ---------- */
+
+
+
+
+.recherche-champ {
+  flex: 1 1 260px;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  background: var(--ground);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--rayon);
+  padding: 9px 13px;
+}
+
+.recherche-champ::placeholder { color: var(--ink-3); }
+
+.recherche-champ:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+  border-color: var(--accent);
+}
+
+.bouton-primaire {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .bouton-primaire { color: #ffffff; }
+}
+
+.bouton-primaire:hover:not(:disabled) { filter: brightness(1.08); background: var(--accent); }
+
+
+/* ---------- résultats de recherche ---------- */
+
+.resultats { margin-bottom: 34px; }
+
+.verdict {
+  border: 1px solid var(--line);
+  border-radius: var(--rayon);
+  background: var(--surface);
+  box-shadow: var(--ombre);
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+
+.verdict-titre {
+  font-family: Archivo, ui-sans-serif, sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  margin: 0 0 6px;
+}
+
+.verdict-couvert { border-left: 3px solid var(--ok); }
+.verdict-vierge { border-left: 3px solid var(--accent); }
+
+.verdict p { margin: 0; color: var(--ink-2); font-size: 14.5px; }
+
+.repartition {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.part {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11.5px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 4px 11px;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, color .15s ease;
+}
+
+.part:hover { border-color: var(--accent); color: var(--ink); }
+.part:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.part b { color: var(--accent); font-weight: 600; }
+.part-vide { opacity: .45; }
+
+.part[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  opacity: 1;
+}
+
+.part[aria-pressed="true"] b { color: #fff; }
+
+@media (prefers-color-scheme: dark) {
+  .part[aria-pressed="true"],
+  .part[aria-pressed="true"] b { color: #ffffff; }
+}
+
+.nuance {
+  margin-top: 8px !important;
+  font-size: 13.5px;
+  color: var(--ink-3) !important;
+}
+
+
+
+.pagineur {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.fleche {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 17px;
+  line-height: 1;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--rayon);
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+
+.fleche:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); }
+.fleche:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fleche:disabled { opacity: .32; cursor: default; }
+
+.position {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+  min-width: 74px;
+  text-align: center;
+}
+
+.lien-action {
+  font: inherit;
+  color: var(--accent);
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.lien-action:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.liste-resultats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 12px;
+}
+
+.resultat {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--rayon);
+  padding: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .15s ease;
+}
+
+.resultat:hover { border-color: var(--accent); }
+
+
+.resultat:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.resultat img,
+.resultat .sans-visuel {
+  width: 74px;
+  height: 54px;
+  flex: none;
+  object-fit: cover;
+  border-radius: 2px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+}
+
+.resultat-texte { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+
+.resultat-titre {
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.32;
+}
+
+.resultat-meta {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.resultat-meta b { color: var(--accent); font-weight: 600; }
+
+.repli {
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--rayon);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  font-size: 14.5px;
+  color: var(--ink-2);
+}
+
+.repli b { color: var(--ink); }
+
+.titre-section {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+/* ---------- filtres ---------- */
+
+.page {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 30px 28px 72px;
+}
+
+/* Les styles du panneau de filtres sont plus bas, section « panneau de
+   filtres repliable » : il s'agit d'un <details>, pas d'une barre. */
+
+.libelle-filtre {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.chip {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  color: var(--ink-2);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 5px 13px;
+  cursor: pointer;
+  transition: color .15s ease, background .15s ease, border-color .15s ease;
+}
+
+.chip:hover { border-color: var(--accent); color: var(--ink); }
+
+.chip[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .chip[aria-pressed="true"] { color: #ffffff; }
+}
+
+.chip .decompte { opacity: .65; margin-left: 5px; font-weight: 400; }
+
+.compteur {
+  margin: 18px 0 20px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11.5px;
+  color: var(--ink-3);
+  letter-spacing: .04em;
+}
+
+/* ---------- grille de cartes ---------- */
+
+.grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+  gap: 22px;
+}
+
+.carte {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre);
+  overflow: hidden;
+  transition: transform .18s ease, border-color .18s ease;
+}
+
+.carte:hover { transform: translateY(-2px); border-color: var(--line-strong); }
+
+.carte-lien { text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%; }
+
+.carte-lien:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.vignette {
+  aspect-ratio: 3 / 2;
+  width: 100%;
+  object-fit: cover;
+  background: var(--surface-2);
+  display: block;
+  border-bottom: 1px solid var(--line);
+}
+
+.vignette-absente {
+  aspect-ratio: 3 / 2;
+  background: linear-gradient(135deg, var(--surface-2), var(--ground));
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: .08em;
+}
+
+.carte-corps { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
+
+.carte-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.badge-site {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.badge-type {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  padding: 1px 6px;
+}
+
+.carte h3 {
+  font-size: 17.5px;
+  font-weight: 600;
+  letter-spacing: -.012em;
+  line-height: 1.28;
+}
+
+.carte-extrait {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+.carte-date {
+  margin-top: auto;
+  padding-top: 10px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- squelette de chargement ---------- */
+
+.squelette { pointer-events: none; }
+.squelette .vignette-absente,
+.squelette .barre { animation: pulsation 1.4s ease-in-out infinite; }
+.squelette .barre { height: 12px; border-radius: 3px; background: var(--surface-2); }
+.squelette .barre.courte { width: 45%; }
+.squelette .barre.longue { width: 88%; }
+
+@keyframes pulsation { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .squelette .vignette-absente, .squelette .barre { animation: none; }
+  .carte { transition: none; }
+  .carte:hover { transform: none; }
+}
+
+/* ---------- messages et diagnostic ---------- */
+
+.message {
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--bad);
+  background: var(--bad-soft);
+  border-radius: var(--rayon);
+  padding: 16px 18px;
+  color: var(--ink);
+}
+
+.diagnostic {
+  margin-top: 44px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.diagnostic h2 {
+  font-size: 12px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.diagnostic ul { margin: 0; padding-left: 18px; }
+
+.diagnostic li {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  margin-bottom: 5px;
+}
+
+.diagnostic code {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 1px 5px;
+}
+
+.attendu { color: var(--ink-3); }
+.anomalie { color: var(--bad); font-weight: 600; }
+
+.pied {
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+
+
+/* ---------- résumé d'article ---------- */
+
+.carte-pied {
+  padding: 0 18px 14px;
+  margin-top: -4px;
+}
+
+.bouton-resume {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: none;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--rayon);
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+
+.bouton-resume:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.bouton-resume:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.bouton-resume:disabled { opacity: .55; cursor: progress; }
+
+.resume {
+  border-top: 1px solid var(--line);
+  background: var(--surface-2);
+  padding: 15px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.resume-texte {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.resume-attente {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--ink-3);
+}
+
+.resume-points {
+  margin: 0;
+  padding-left: 17px;
+  font-size: 13.5px;
+  color: var(--ink-2);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.resume-points li::marker { font-weight: 700; }
+.resume-points.positifs li::marker { color: var(--ok); content: "+ "; }
+.resume-points.negatifs li::marker { color: var(--bad); content: "− "; }
+
+.resume-source {
+  margin: 0;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.mode-resume {
+  margin: -14px 0 26px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: .03em;
+  color: var(--ink-3);
+  border-left: 2px solid var(--line-strong);
+  padding-left: 10px;
+}
+
+.mode-resume.actif {
+  color: var(--ok);
+  border-left-color: var(--ok);
+}
+
+/* ---------- couleurs de marque des sites ----------
+ * Relevées sur chaque site (variable --accent de leur thème), puis ajustées
+ * en luminosité — teinte et saturation conservées — pour atteindre un
+ * contraste d'au moins 4,5:1 sur le fond de chaque thème. Les valeurs brutes
+ * sont inutilisables telles quelles : le turquoise de Lavelab tombe à 2,0:1
+ * sur fond clair, le brun de Coffealover à 1,8:1 sur fond sombre.
+ *
+ * La couleur ne porte jamais l'information seule : le nom du site est toujours
+ * écrit à côté.
+ */
+/*
+ * Deux variables par site, parce que les contraintes diffèrent :
+ *
+ *   --marque        couleur authentique du site, utilisée en FOND de pastille.
+ *                   Sur un fond coloré, le texte s'adapte (--marque-texte), ce
+ *                   qui permet de garder la couleur exacte de la marque.
+ *   --marque-filet  variante ajustée en luminosité, pour le filet et la
+ *                   pastille de filtre, qui doivent ressortir sur le fond
+ *                   de la page.
+ *
+ * Ce dédoublement existe pour le jaune de Bedbedtime : #faaf03 ne dépasse pas
+ * 1,9:1 sur blanc, donc illisible en texte — un jaune assez sombre pour être
+ * lisible n'est plus un jaune, c'est un olive. En fond de pastille avec un
+ * texte sombre, il atteint 9,8:1 tout en restant franchement jaune.
+ */
+[data-site="selectos"]     { --marque: #377dff; --marque-texte: #1a1408; --marque-filet: #1e6cff; }
+[data-site="lavelab"]      { --marque: #2bccab; --marque-texte: #1a1408; --marque-filet: #1c846f; }
+[data-site="ultracooker"]  { --marque: #d40092; --marque-texte: #ffffff; --marque-filet: #d40092; }
+[data-site="coffealover"]  { --marque: #72300c; --marque-texte: #ffffff; --marque-filet: #a84a12; }
+[data-site="bedbedtime"]   { --marque: #faaf03; --marque-texte: #1a1408; --marque-filet: #c58c00; }
+[data-site="glamourquest"] { --marque: #fb816f; --marque-texte: #1a1408; --marque-filet: #e42306; }
+
+@media (prefers-color-scheme: dark) {
+  /* La pastille garde sa couleur : son fond ne dépend pas du thème.
+     Seul le filet, posé sur la page, doit être éclairci. */
+  [data-site="selectos"]     { --marque-filet: #377dff; }
+  [data-site="lavelab"]      { --marque-filet: #2bccab; }
+  [data-site="ultracooker"]  { --marque-filet: #f800ab; }
+  [data-site="coffealover"]  { --marque-filet: #d85b17; }
+  [data-site="bedbedtime"]   { --marque-filet: #faaf03; }
+  [data-site="glamourquest"] { --marque-filet: #fb816f; }
+}
+
+/* Filet vertical : identifie la provenance avant même la lecture. */
+.carte[data-site] { border-left: 3px solid var(--marque-filet); }
+.resultat[data-site] { border-left: 3px solid var(--marque-filet); }
+
+/* Le nom du site devient une étiquette pleine, aux couleurs du site. */
+.carte[data-site] .badge-site,
+.resultat[data-site] .resultat-meta b {
+  background: var(--marque);
+  color: var(--marque-texte);
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+
+.resultat[data-site] .resultat-meta b { margin-right: 2px; }
+
+/* Pastille de couleur sur les filtres, alignée sur le filet des cartes. */
+.chip[data-site]::before,
+.part[data-site]::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--marque-filet);
+  margin-right: 7px;
+  vertical-align: baseline;
+}
+
+/* Sur pastille active, le fond est déjà l'accent : la puce passe en blanc. */
+.chip[aria-pressed="true"][data-site]::before,
+.part[aria-pressed="true"][data-site]::before { background: currentColor; }
+
+/* ---------- panneau de filtres repliable ---------- */
+
+
+
+.filtres-titre::-webkit-details-marker { display: none; }
+
+
+.filtres[open] 
+.filtres-resume.actif { color: var(--accent); font-weight: 600; }
+
+
+.groupe-filtre {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.groupe-filtre .libelle-filtre { min-width: 74px; }
+
+
+/* ---------- pied de page et mention légale ---------- */
+
+.pied-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 26px 28px 34px;
+}
+
+
+.mention {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  max-width: 74ch;
+}
+
+.mention-titre {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 12px;
+}
+
+.mention p {
+  margin: 0 0 10px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+
+.mention-copyright {
+  margin-top: 16px !important;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: .04em;
+}
+
+/* ---------- indépendance des cartes ---------- */
+
+/*
+ * Sans ceci, les éléments d'une même ligne de grille s'étirent à la hauteur du
+ * plus grand : ouvrir un résumé allongeait toutes les cartes voisines. Chaque
+ * carte prend désormais sa hauteur propre, et seule celle qu'on déplie grandit.
+ */
+.grille { align-items: start; }
+
+/*
+ * Contrepartie du point précédent : sans étirement, les cartes retrouvent leur
+ * hauteur naturelle, qui varie selon la longueur du titre. Réserver deux lignes
+ * de titre — sans tronquer les titres plus longs — resserre nettement l'écart.
+ */
+.carte h3 { min-height: 2.56em; }
+
+/* ---------- logos ---------- */
+
+/*
+ * Les logos des sites sont dessinés pour un en-tête blanc et contiennent tous
+ * des couleurs sombres. Posés directement sur l'interface, ils disparaîtraient
+ * en thème sombre. Une pastille claire, identique dans les deux thèmes, les
+ * rend lisibles partout — et les isole visuellement, ce qui est juste : ce sont
+ * des marques tierces, pas des éléments de cette interface.
+ */
+.logo-reseau,
+.badge-logo {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+.badge-logo {
+  padding: 3px 7px;
+  vertical-align: middle;
+}
+
+/* Hauteur fixe, largeur libre : les proportions vont de 2,5 à 5,4 selon
+   les sites, donc une largeur commune en écraserait certains. */
+.badge-logo img {
+  height: 15px;
+  width: auto;
+  display: block;
+}
+
+
+
+
+/* Le badge textuel reste le repli quand un logo ne charge pas. */
+.resultat-meta { display: flex; align-items: center; gap: 6px; }
+.resultat-meta .badge-logo img { height: 13px; }
+
+/* ---------- icône de génération ---------- */
+
+.bouton-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.icone-generation {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  /* Hérite de la couleur du bouton, donc suit les deux thèmes. */
+  color: inherit;
+}
+
+.icone-generation .petite { opacity: .55; }
+
+/*
+ * Pendant la génération, l'étincelle principale pulse et la petite tourne :
+ * le mouvement signale un travail en cours, là où un bouton figé laisse
+ * croire que le clic n'a rien déclenché.
+ */
+.bouton-resume:disabled .icone-generation .etincelle {
+  animation: pulsation-etincelle 1.1s ease-in-out infinite;
+  transform-origin: 11px 10.5px;
+}
+
+.bouton-resume:disabled .icone-generation .petite {
+  animation: rotation-etincelle 1.6s linear infinite;
+  transform-origin: 18px 17.5px;
+}
+
+@keyframes pulsation-etincelle {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(.72); opacity: .5; }
+}
+
+@keyframes rotation-etincelle {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Le mouvement n'est jamais le seul signal : le libellé passe à « Lecture… ». */
+@media (prefers-reduced-motion: reduce) {
+  .bouton-resume:disabled .icone-generation .etincelle,
+  .bouton-resume:disabled .icone-generation .petite { animation: none; }
+  .bouton-resume:disabled .icone-generation { opacity: .55; }
+}
+
+/* ---------- recherche, dans l'en-tête ---------- */
+
+.recherche {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex: 1 1 320px;
+  max-width: 460px;
+}
+
+.recherche-champ {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 14.5px;
+  color: var(--ink);
+  background: var(--ground);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--rayon);
+  padding: 8px 12px;
+}
+
+.recherche-champ::placeholder { color: var(--ink-3); }
+
+.recherche-champ:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+  border-color: var(--accent);
+}
+
+/* ---------- ligne d'état ---------- */
+
+/*
+ * Fraîcheur et actualisation manuelle, réunies sur une ligne discrète sous le
+ * comptage. Le cache se rafraîchit seul en arrière-plan : forcer la mise à jour
+ * n'est utile qu'après une publication, ce qui ne justifiait pas une place
+ * dans l'en-tête.
+ */
+.etat-ligne {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: -12px 0 22px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: .03em;
+  color: var(--ink-3);
+}
+
+.etat-ligne .lien-action { font-size: 11px; font-family: inherit; }
+
+/* ---------- filtres, repliés sans bandeau ---------- */
+
+/*
+ * Un simple bouton texte, sans cadre ni fond : replié, le panneau ne doit rien
+ * peser visuellement. Les chips n'apparaissent qu'une fois ouvert.
+ */
+.filtres { margin-bottom: 18px; }
+
+.filtres-titre {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  cursor: pointer;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  list-style: none;
+  width: fit-content;
+}
+
+.filtres-titre:hover { color: var(--accent); }
+
+.filtres-corps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 0 4px;
+  margin-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+/*
+ * Chevron dessiné en CSS : le caractère « ▸ » n'existe pas dans JetBrains Mono
+ * et retombait sur une police de secours, avec un rendu incohérent.
+ */
+.filtres-titre::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 4px solid currentColor;
+  border-top: 3.5px solid transparent;
+  border-bottom: 3.5px solid transparent;
+  transition: transform .15s ease;
+}
+
+.filtres[open] .filtres-titre::before { transform: rotate(90deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .filtres-titre::before { transition: none; }
+}
+
+.filtres-resume {
+  text-transform: none;
+  letter-spacing: .02em;
+  color: var(--ink-3);
+}
+
+.filtres-resume.actif { color: var(--accent); font-weight: 600; }
+
+/* ---------- en-tête ---------- */
+
+
+/* Pastille claire dans les deux thèmes : le logo est dessiné pour un fond
+   blanc et deviendrait illisible sur le fond sombre. */
+.logo-reseau {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--rayon);
+  padding: 7px 13px;
+}
+
+.logo-reseau img {
+  height: 34px;
+  width: auto;
+  display: block;
+}
+
+.nom-reseau {
+  font-family: Archivo, ui-sans-serif, system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: var(--ink-2);
+}
+
+/* Le titre de page vit désormais dans le contenu, sous l'en-tête. */
+.page > h1 {
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 700;
+  letter-spacing: -.025em;
+  line-height: 1.05;
+  margin-bottom: 22px;
+}
+
+/* ---------- comptage, sous les articles ---------- */
+
+.compteur { margin: 26px 0 0; }
+.etat-ligne { margin: 6px 0 0; }
+
+/* Identité : le logo et « Réseau » sur une ligne, la note technique dessous. */
+.identite {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+.identite-ligne {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.identite-note {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+/* La recherche s'aligne sur le haut de l'identité, devenue plus haute. */
+.masthead-inner { align-items: flex-start; }
+.masthead-inner .recherche { margin-top: 6px; }

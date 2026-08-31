@@ -1,0 +1,4 @@
+# Fins de ligne normalisées : stockées en LF dans le dépôt, converties au
+# format du système à l'extraction. Sans cela, un clone sous Windows et un
+# clone sous Linux affichent des différences sur des fichiers identiques.
+* text=auto eol=lf
