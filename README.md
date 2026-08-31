@@ -6,7 +6,17 @@ Rassemble les derniers articles de six sites WordPress — Selectos, Lavelab,
 Ultracooker, Coffealover, Bedbedtime et Glamourquest — avec une recherche sur
 l'ensemble de leurs catalogues et un résumé par article.
 
-Tourne avec Node seul, sans aucune dépendance.
+**Trois choses à savoir avant d'explorer :**
+
+- 🔒 **La démonstration n'est indexable par aucun moteur de recherche.**
+  Balise `noindex, nofollow`, en-tête `X-Robots-Tag` sur chaque réponse, et un
+  `robots.txt` qui laisse les robots lire ces directives. Aucun risque de
+  contenu dupliqué pour les sites d'origine.
+- ✅ **Tout fonctionne sans clé API.** Les résumés sont produits localement à
+  partir des conclusions de la rédaction. Une clé Anthropic les fait *rédiger*
+  par Claude — c'est un bonus, pas un prérequis.
+- 📦 **Aucune dépendance ni installation.** `git clone` puis `npm start`, avec
+  Node 20+. Rien d'autre.
 
 > **Projet personnel à but démonstratif.** Développé de façon indépendante à des
 > fins de démonstration technique. Il n'est ni affilié à, ni commandité, ni

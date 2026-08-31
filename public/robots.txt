@@ -1,0 +1,12 @@
+# Démonstration technique — à n'indexer nulle part.
+#
+# L'exploration est volontairement autorisée : c'est la seule façon pour un
+# robot de lire la directive « noindex », présente dans la balise meta de la
+# page et dans l'en-tête X-Robots-Tag de chaque réponse.
+#
+# Un « Disallow: / » aurait l'effet inverse de celui recherché : il empêcherait
+# la lecture de ces directives, et l'adresse pourrait rester listée sans
+# contenu.
+
+User-agent: *
+Disallow:
