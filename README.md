@@ -30,8 +30,8 @@ l'ensemble de leurs catalogues et un résumé par article.
 ## Ce que fait l'outil
 
 - **Agrège** les 3 derniers articles de chaque site, images et dates comprises.
-- **Cherche** dans leurs catalogues complets — « a-t-on déjà écrit sur ce
-  sujet ? » — en écartant les articles qui ne font que mentionner le terme.
+- **Cherche** dans leurs catalogues complets, en écartant les articles qui ne
+  font que mentionner le terme sans y être consacrés.
 - **Résume** un article à la demande : verdict, note, points forts et faibles.
 - **Tient debout** quand un site ralentit ou ne répond plus.
 
