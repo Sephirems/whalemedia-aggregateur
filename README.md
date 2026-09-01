@@ -211,3 +211,20 @@ change. Le cache disque, impossible sur une plateforme sans serveur permanent,
 est remplacé par les en-têtes `Cache-Control` du CDN — même comportement, mais
 partagé entre tous les visiteurs : cent consultations dans l'heure ne
 déclenchent qu'un seul passage sur les six sites.
+
+---
+
+## Licence
+
+MIT — voir [LICENSE](LICENSE).
+
+Elle porte sur le **code** de ce dépôt, et lui seul. Les articles, images,
+marques et contenus agrégés appartiennent à leurs propriétaires respectifs :
+aucune licence n'est accordée sur eux ici, et aucune ne pourrait l'être.
+
+## Autre projet de démonstration
+
+**[Contact Intelligence](https://github.com/Sephirems/contact-intelligence)** —
+extension Chrome/Edge qui centralise en un clic tous les moyens de contacter
+l'entreprise dont on visite le site. Manifest V3, zéro dépendance, analyse
+entièrement locale.
